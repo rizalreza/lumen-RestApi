@@ -26,3 +26,15 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
   $router->put('pegawai/{id}', ['uses' => 'PegawaiController@update']);
 });
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+  $router->get('jabatan',  ['uses' => 'JabatanController@showAllJabatan']);
+
+  $router->get('jabatan/{id}', ['uses' => 'JabatanController@showOneJabatan']);
+
+  $router->post('jabatan', ['uses' => 'JabatanController@create']);
+
+  $router->delete('jabatan/{id}', ['uses' => 'JabatanController@delete']);
+
+  $router->put('jabatan/{id}', ['uses' => 'JabatanController@update']);
+});

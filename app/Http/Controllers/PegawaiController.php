@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Pegawai;
 use Illuminate\Http\Request;
+use DB;
 
 class PegawaiController extends Controller
 
 {
 	public function showAllPegawai()
 	{
-		return response()->json(Pegawai::all());
+		$users = DB::table('pegawais')
+            ->join('jabatans', 'jabatans.id', '=', 'pegawais.jabatan_id')
+            ->select()
+            ->get();
+		// return response()->json(Pegawai::all());
+		return response()->json($users);
 	}
 
 
@@ -29,6 +35,7 @@ class PegawaiController extends Controller
 
 	public function update($id, Request $request)
 	{
+		// print_r($request->all());exit;
 		$pegawai = Pegawai::findOrFail($id);
 
 		$pegawai->update($request->all());
